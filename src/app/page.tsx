@@ -5,12 +5,15 @@ import Hero from "@/components/landing/Hero";
 import HowItWorks from "@/components/landing/HowItWorks";
 import PricingSection from "@/components/landing/PricingSection";
 import WhatToAsk from "@/components/landing/WhatToAsk";
+import { syncUser } from "@/lib/actions/users";
 import { currentUser } from "@clerk/nextjs/server";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 
 export default async function Home() {
   const user = await currentUser();
+
+    await syncUser();
 
   if (user) {
     const adminEmail = process.env.NEXT_PUBLIC_ADMIN_EMAIL;
